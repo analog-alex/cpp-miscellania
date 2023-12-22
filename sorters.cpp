@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <cstddef>
 
 /*
  * Insertion sort -- O(N^2)
