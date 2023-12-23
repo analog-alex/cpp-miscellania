@@ -9,12 +9,15 @@
  * Done in-place, so we return nothing
  */
 template<typename T>
-void insertion_sort(std::vector<T> &elements) {
+void insertion_sort(std::vector<T> &elements)
+{
     if (elements.empty() || elements.size() <= 1) return;
 
-    for (size_t i = 1; i < elements.size(); i++) {
+    for (size_t i = 1; i < elements.size(); i++)
+    {
         size_t j = i;
-        while (j > 0 && elements[j - 1] > elements[j]) {
+        while (j > 0 && elements[j - 1] > elements[j])
+        {
             std::swap(elements[j - 1], elements[j]);
             j--;
         }
@@ -28,12 +31,16 @@ void insertion_sort(std::vector<T> &elements) {
  * Done in-place, so we return nothing
  */
 template<typename T>
-void bubble_sort(std::vector<T> &elements) {
+void bubble_sort(std::vector<T> &elements)
+{
     if (elements.empty() || elements.size() == 1) return;
 
-    for (size_t i = 0; i < elements.size(); i++) {
-        for (size_t j = 0; j < elements.size() - 1 - i; j++) {
-            if (elements[j] > elements[j + 1]) {
+    for (size_t i = 0; i < elements.size(); i++)
+    {
+        for (size_t j = 0; j < elements.size() - 1 - i; j++)
+        {
+            if (elements[j] > elements[j + 1])
+            {
                 std::swap(elements[j], elements[j + 1]);
             }
         }
@@ -47,14 +54,18 @@ void bubble_sort(std::vector<T> &elements) {
  * Done in-place, so we return nothing
  */
 template<typename T>
-void selection_sort(std::vector<T> &elements) {
+void selection_sort(std::vector<T> &elements)
+{
     if (elements.empty() || elements.size() == 1) return;
 
-    for (size_t i = 0; i < elements.size(); i++) {
+    for (size_t i = 0; i < elements.size(); i++)
+    {
         size_t min_index_position = i;
 
-        for (size_t j = i; j < elements.size(); j++) {
-            if (elements[j] < elements[min_index_position]) {
+        for (size_t j = i; j < elements.size(); j++)
+        {
+            if (elements[j] < elements[min_index_position])
+            {
                 min_index_position = j;
             }
         }
@@ -70,17 +81,21 @@ void selection_sort(std::vector<T> &elements) {
  * Not in place, so we can understand the algorithm better
  */
 template<typename T>
-std::vector<T> naive_quick_sort(const std::vector<T> &elements) { // NOLINT
+std::vector<T> naive_quick_sort(const std::vector<T> &elements)
+{ // NOLINT
     if (elements.empty() || elements.size() == 1) return elements;
 
-    auto pivot =  elements[0];
+    auto pivot = elements[0];
     auto vec_left = std::vector<T>();
     auto vec_right = std::vector<T>();
 
-    for (size_t i = 1; i < elements.size(); i++) {
-        if (elements[i] < pivot) {
+    for (size_t i = 1; i < elements.size(); i++)
+    {
+        if (elements[i] < pivot)
+        {
             vec_left.emplace_back(elements[i]);
-        } else {
+        } else
+        {
             vec_right.emplace_back(elements[i]);
         }
     }
@@ -105,19 +120,22 @@ std::vector<T> naive_quick_sort(const std::vector<T> &elements) { // NOLINT
  *
  * Done in-place, so we return nothing
  */
-template <typename T>
-void quick_sort_partition(std::vector<T>& elements, int start, int end) { // NOLINT
+template<typename T>
+void quick_sort_partition(std::vector<T> &elements, int start, int end)
+{ // NOLINT
     if (start >= end) return;
 
     T pivot = elements[start];
     int i = start + 1;
     int j = end;
 
-    while (i <= j) {
+    while (i <= j)
+    {
         while (i <= end && elements[i] <= pivot) i++;
         while (j > start && elements[j] > pivot) j--;
 
-        if (i < j) {
+        if (i < j)
+        {
             std::swap(elements[i], elements[j]);
         }
     }
@@ -131,8 +149,9 @@ void quick_sort_partition(std::vector<T>& elements, int start, int end) { // NOL
 }
 
 
-template <typename T>
-void quick_sort(std::vector<T> &elements) {
+template<typename T>
+void quick_sort(std::vector<T> &elements)
+{
     if (elements.empty() || elements.size() == 1) return;
 
     quick_sort_partition(elements, 0, elements.size() - 1);
@@ -148,7 +167,8 @@ void quick_sort(std::vector<T> &elements) {
  * Done in-place, so we return nothing
  */
 template<typename T>
-void merge(std::vector<T>& left, std::vector<T>& right, std::vector<T>& merged) {
+void merge(std::vector<T> &left, std::vector<T> &right, std::vector<T> &merged)
+{
     size_t left_size = left.size();
     size_t right_size = right.size();
 
@@ -156,25 +176,31 @@ void merge(std::vector<T>& left, std::vector<T>& right, std::vector<T>& merged) 
     size_t j = 0;
     size_t k = 0;
 
-    while (i < left_size && j < right_size) {
-        if (left[i] < right[j]) {
+    while (i < left_size && j < right_size)
+    {
+        if (left[i] < right[j])
+        {
             merged[k++] = left[i++];
-        } else {
+        } else
+        {
             merged[k++] = right[j++];
         }
     }
 
-    while (i < left_size) {
+    while (i < left_size)
+    {
         merged[k++] = left[i++];
     }
 
-    while (j < right_size) {
+    while (j < right_size)
+    {
         merged[k++] = right[j++];
     }
 }
 
 template<typename T>
-void merge_sort(std::vector<T>& elements) { // NOLINT
+void merge_sort(std::vector<T> &elements)
+{ // NOLINT
     if (elements.empty() || elements.size() == 1) return;
 
     size_t size = elements.size();
@@ -183,11 +209,13 @@ void merge_sort(std::vector<T>& elements) { // NOLINT
     std::vector<T> left(mid);
     std::vector<T> right(size - mid);
 
-    for (size_t i = 0; i < mid; ++i) {
+    for (size_t i = 0; i < mid; ++i)
+    {
         left[i] = elements[i];
     }
 
-    for (size_t i = mid; i < size; ++i) {
+    for (size_t i = mid; i < size; ++i)
+    {
         right[i - mid] = elements[i];
     }
 
@@ -202,11 +230,13 @@ void merge_sort(std::vector<T>& elements) { // NOLINT
 /*
  * Test cases generator
  */
-std::vector<int> unordered_vec_of_ints() {
+std::vector<int> unordered_vec_of_ints()
+{
     return std::vector<int>{4, 2, 5, 1, 3, 3, 6};
 }
 
-int main() {
+int main()
+{
     // due to the in-order approach we kinda repeat ourselves in the tests
     std::vector<int> numbers;
 
